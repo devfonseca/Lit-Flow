@@ -1,5 +1,5 @@
 from modelos.avaliacao import Avaliacao
-
+from modelos.lista_livros.lista_livros import ListaLivros
 
 class Livro:
     livros = []
@@ -9,6 +9,7 @@ class Livro:
         self._genero = genero.title()
         self._disponivel = False
         self._avaliacoes = []
+        self._lista_livro = []
         Livro.livros.append(self)
 
     def __str__(self):
@@ -51,3 +52,16 @@ class Livro:
             return "-"
         soma = sum(av._nota for av in self._avaliacoes)
         return round(soma / len(self._avaliacoes), 1)
+
+#    def adicionar_genero_na_lista_livro(self, genero):
+#        self._lista_livro.append(genero)
+
+    def adicionar_na_lista_livro(self, item):
+        self._lista_livro.append(item)
+    
+    @property
+    def exibir_lista_livro(self):
+        print("Lista de Livros: \n")
+        for i,item in enumerate(self._lista_livro, start=1):
+            mensagem = f"{i}. Nome: {item._nome} | Preço: R${item._preco:.2f} | Descrição: {item._descricao}"
+            print(mensagem)
